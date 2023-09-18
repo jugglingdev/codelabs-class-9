@@ -227,6 +227,8 @@
         function removeBookmark(e) {
             if (!e.target.matches('.glyphicon-remove')) return;
 
+            e.preventDefault();
+
             const index = e.target.parentNode.dataset.id;
             bookmarks.splice(index, 1);
             fillBookmarksList(bookmarks);
