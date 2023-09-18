@@ -141,27 +141,56 @@
 
         // =====================
 
+        localStorage.setItem('my_thing', 'something');
+
         const bookmarksList = document.querySelector('.bookmarks-list');
         const bookmarkForm = document.querySelector('.bookmark-form');
         const bookmarkInput = bookmarkForm.querySelector('input[type=text]');
+        const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
 
         bookmarkForm.addEventListener('submit', createBookmark);
+
+        fillBookmarksList(bookmarks);
 
         function createBookmark(e) {
             e.preventDefault();
 
             const title = bookmarkInput.value;
-            const bookmark = document.createElement('a');
+            const bookmark = {
+                title: title
+            };
 
-            bookmark.className = 'bookmark';
-            bookmark.innerText = title;
-            bookmark.href = '#';
-            bookmark.target = '_blank';
-            bookmarksList.appendChild(bookmark);
-
+            bookmarks.push(bookmark);
+            fillBookmarksList(bookmarks);
+            storeBookmarks(bookmarks);
             bookmarkForm.reset();
+
+            console.table(bookmarks);
+
+            // const bookmark = document.createElement('a');
+
+            // bookmark.className = 'bookmark';
+            // bookmark.innerText = title;
+            // bookmark.href = '#';
+            // bookmark.target = '_blank';
+            // bookmarksList.appendChild(bookmark);
         }
 
+        function fillBookmarksList(bookmarks = []) {
+            const bookmarksHtml = bookmarks.map((bookmark) => {
+                return `
+                    <a href="#" class="bookmark">
+                        ${bookmark.title}
+                    </a>
+                `;
+            }).join('');
+
+            bookmarksList.innerHTML = bookmarksHtml;
+        }
+
+        function storeBookmarks(bookmarks = []) {
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+        }
     
     </script>
     
