@@ -105,7 +105,8 @@
             border-radius: 3px;
             background-image: url('./img/default-avatar.jpg');
             background-size: cover;
-            width: 80px;
+            background-position: top center;
+            width: 120px;
             height: 80px;
             margin-right: 20px;
         }
@@ -153,7 +154,7 @@
         const overlay = document.querySelector('.overlay');
 
         input.addEventListener('focusin', showFloater);
-        input.addEventListener('focusout', closeFloater);
+        // input.addEventListener('focusout', closeFloater);
         overlay.addEventListener('click', closeFloater);
 
         function showFloater() {
@@ -175,6 +176,9 @@
         const bookmarkInput = bookmarkForm.querySelector('input[type=text]');
         const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
 
+        const apiUrl = 'https://opengraph.io/api/1.1/site';
+        const appId = 'df8e9876-4b0d-4d41-b16b-7afa92516989';
+        
         bookmarkForm.addEventListener('submit', createBookmark);
         bookmarksList.addEventListener('click', removeBookmark);
 
@@ -183,25 +187,30 @@
         function createBookmark(e) {
             e.preventDefault();
 
-            const title = bookmarkInput.value;
-            const bookmark = {
-                title: title
-            };
+            if (!bookmarkInput.value) {
+                alert('We need info!');
+                return;
+            }
 
-            bookmarks.push(bookmark);
-            fillBookmarksList(bookmarks);
-            storeBookmarks(bookmarks);
-            bookmarkForm.reset();
+            const url = encodeURIComponent(bookmarkInput.value);
 
-            console.table(bookmarks);
+            fetch(`${apiUrl}/${url}?app_id=${appId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const bookmark = {
+                        title: data.hybridGraph.title,
+                        image: data.hybridGraph.image,
+                        link: data.hybridGraph.url
+                    };
 
-            // const bookmark = document.createElement('a');
-
-            // bookmark.className = 'bookmark';
-            // bookmark.innerText = title;
-            // bookmark.href = '#';
-            // bookmark.target = '_blank';
-            // bookmarksList.appendChild(bookmark);
+                    bookmarks.push(bookmark);
+                    fillBookmarksList(bookmarks);
+                    storeBookmarks(bookmarks);
+                    bookmarkForm.reset();
+                })
+                .catch(error => {
+                    alert('There was a problem getting info!')
+                });
         }
 
         function removeBookmark(e) {
@@ -216,8 +225,8 @@
         function fillBookmarksList(bookmarks = []) {
             const bookmarksHtml = bookmarks.map((bookmark, i) => {
                 return `
-                    <a href="#" class="bookmark" data-id=${i}>
-                        <div class="img"></div>
+                    <a href="${bookmark.link}" class="bookmark" data-id=${i}>
+                        <div class="img" style="background-image:url('${bookmark.image}')"></div>
                         <div class="title">${bookmark.title}</div>
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
