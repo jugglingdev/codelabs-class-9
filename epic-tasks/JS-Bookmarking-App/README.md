@@ -25,7 +25,7 @@ The HTML for this project is fairly simple.  There's a *floater* where the user 
 
 ### CSS
 
-Continuing with the overlay, its `z-index` is set under the floater and above the bookmark list and background.  That way, when the floater is selected, the overlay's `opacity` changes to darken everything behind it.  The floater scales up in size and stands out on the page because it is the only part of the app that doesn't darken behind the overlay.
+Continuing with the overlay, its `z-index` is set under the floater and above the bookmark list and background.  That way, when the floater is selected, the overlay's `opacity` changes to darken everything behind it.  The floater scales up in size and stands out on the page because it is the only part of the app that doesn't darken behind the overlay.  The overlay's `pointer-events` is set to `none` when the floater is not selected so that it doesn't trigger any events.  It's reset to `all` when the floater is selected so the user can click out of the floater.  The body class `show-floater` was used as a conditional to coordinate these events.
 
 Another helpful feature was setting up a *default avatar* for each bookmark image.  If a website doesn't have an image, then the default avatar will appear.
 
@@ -35,30 +35,28 @@ At the end of the project, I added additional hover effects to improve the UX wh
 
 ### JavaScript
 
+For me, the JavaScript portion of this project was the meat.  It's where I learned the most.  Helpful tidbits include:
+
+- Set a default function parameter with `=`
+- Pass in `i` as a second parameter in `map()` as a handy way to add `data-ID` attributes and ID specific elements (e.g. bookmarks)
+- `console.dir(element)` to see everything you have access to
+- Check if a mouse click was on a given element when the event listener is attached to the parent element with `e.target.matches('element')`
+- Set options like the following in case nothing is in `localStorage` yet:
+  - `const bookmarks = JSON.parse(localStorage.getItem('books')) || [];`
+
+#### `localStorage`
+
+`localStorage` is a web API in JavaScript that stores key value pairs in a web browser with no expiration time.  It's often used for caching data, storing user preferences, and in general storing data when the user navigates away from the page or closes the browser.  Its methods include:
+    - Storing and updating data: `.setItem()`
+    - Retrieving data: `.getItem()`
+    - Removing data: `.removeItem()`
+    - Clearing all data: `.clear()`
 
 
 
-class on body as conditional in CSS
+#### OpenGraph
 
-pointer-events
 
-local storage
-
-map()
-
-default parameter
-
-setting option const bookmarks = JSON.parse(localStorage.getItem('books')) || []; 
-in case nothing is there yet
-
-e.target.matches('.glyphicon-remove')
-neat way to check if mouse click was on a given element when the event listener is attached to a parent element
-
-can pass in i as second parameter in map() as a handy way to add data-id custom attribute to later ID specific bookmarks
-
-console.dir(element) to see everything you have access to
-
-OpenGraph
 
 ## Reflection
 
