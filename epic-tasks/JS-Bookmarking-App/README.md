@@ -52,14 +52,19 @@ For me, the JavaScript portion of this project was the meat.  It's where I learn
     - Removing data: `.removeItem()`
     - Clearing all data: `.clear()`
 
-
+In this project, I used `.getItem()` and `.setItem()` to keep the bookmark list up to date even when refreshing the page or leaving the app and coming back later.
 
 #### OpenGraph
 
+[OpenGraph](https://www.opengraph.io/) is a simple web scraper API.  For this project, I used OpenGraph to get a title, image, and url for each bookmark.  The image displays on the left and the title on the right with a working url when the user clicks on the bookmark.
 
+In order to use OpenGraph, I set up an account and got an authentication token to access their API.
 
 ## Reflection
 
+Overall, this was a neat project.  I'm really glad I got experience working with `localStorage` and OpenGraph in particular.  All the little tidbits throughout the HTML, CSS, and JavaScript were helpful as well.  No matter how many times I go back to basics, I always learn something new.
+
+In future projects, I'd like to dive into the backend more and work with APIs.  I also am curious about `sessionStorage` and the differences I will find there.  Another topic I'm interested in is best practices for security-minded development.  My cybersecurity friends would be proud.
 
 ## Acknowledgements
 
