@@ -4,14 +4,16 @@ This project was completed as a part of Chris Sev's [Getting Started with JavaSc
 
 ## Table of Contents
 
-- Bookmarking App
-  - Table of Contents
-  - The Project
-    - HTML
-    - CSS
-    - JavaScript
-  - Reflection
-  - Acknowledgements
+- [Bookmarking App](#bookmarking-app)
+  - [Table of Contents](#table-of-contents)
+  - [The Project](#the-project)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+      - [`localStorage`](#localstorage)
+      - [OpenGraph](#opengraph)
+  - [Reflection](#reflection)
+  - [Acknowledgements](#acknowledgements)
 
 ## The Project
 
