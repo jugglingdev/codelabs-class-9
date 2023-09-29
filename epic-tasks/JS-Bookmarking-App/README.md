@@ -19,7 +19,7 @@ This project was completed as a part of Chris Sev's [Getting Started with JavaSc
 
 The Bookmarking App features a pop up input box that lets the user enter a full website address and add it to a collection of clickable links.  Once added, clicking the link will take the user to the website.  If no longer needed, the links can be deleted individually.  Each bookmark is stored locally, so refreshing the page will not clear the list.
 
-![Bookmarking App Demo](img/bookmarking-app-demo.gif)
+![Bookmarking App Demo](bookmarking-app-demo.gif)
 
 ### HTML
 
